@@ -54,6 +54,7 @@ export const createMessage = async (formState: FormState, formData: FormData) =>
         id: crypto.randomUUID(),
         ...data,
       });
+      // throw new Error('Database error'); for error simulation
   } catch (error) {
     return fromErrorToFromState(error);
   }
