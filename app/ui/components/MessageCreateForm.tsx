@@ -5,6 +5,7 @@ import { useFormStatus, useFormState } from "react-dom";
 import { EMPTY_FORM_STATE } from "@/app/utils";
 import { FieldError } from "./FieldError";
 import { useToastMessage } from "@/app/ui/hooks/useToastMessage";
+import { useFormReset } from "@/app/ui/hooks/useFormReset";
 
 type SubmitButtonProps = {
   label: string;
@@ -25,9 +26,10 @@ function MessageCreateForm() {
   const [formState, action] = useFormState(createMessage, EMPTY_FORM_STATE);
 
   const noScriptFallback = useToastMessage(formState);
+  const formRef = useFormReset(formState);
 
   return (
-    <form action={action} className="flex flex-col gap-y-2">
+    <form action={action} ref={formRef} className="flex flex-col gap-y-2">
       <label htmlFor="title">Title</label>
       <input id="title" name="title" className="border-2" />
       <FieldError formState={formState} name="title" />
