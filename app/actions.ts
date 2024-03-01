@@ -3,15 +3,17 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { fromErrorToFromState } from "./utils";
+import type { FormState } from "./utils";
 
 type Message = {
   id: string;
   text: string;
 };
 
-export type FormState = {
+/*export type FormState = {
     message: string;
-  };
+  };*/
+
 
 let messages: Message[] = [
   {
@@ -58,7 +60,17 @@ export const createMessage = async (formState: FormState, formData: FormData) =>
 
   revalidatePath("/");
 
-  return {
-    message: 'Message created',
-  };
+  return toFormState('SUCCESS', 'Message created');
 };
+
+export const toFormState = (
+    status: FormState['status'],
+    message: string
+  ): FormState => {
+    return {
+      status,
+      message,
+      fieldErrors: {},
+      timestamp: Date.now(),
+    };
+  };
