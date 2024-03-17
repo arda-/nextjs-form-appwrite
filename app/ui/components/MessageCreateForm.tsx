@@ -30,10 +30,6 @@ function MessageCreateForm() {
 
   return (
     <form action={action} ref={formRef} className="flex flex-col gap-y-2">
-      <label htmlFor="title">Title</label>
-      <input id="title" name="title" className="border-2" />
-      <FieldError formState={formState} name="title" />
-
       <label htmlFor="text">Text</label>
       <textarea id="text" name="text" className="border-2" />
       <FieldError formState={formState} name="text" />
